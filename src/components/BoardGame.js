@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Square from './Square'
 
 class BoardGame extends Component {
     constructor(props) {
@@ -40,7 +41,12 @@ class BoardGame extends Component {
             squares: newSquares,
             currentPlayer: this.state.currentPlayer == 'X' ? 'O' : 'X',
             currentTurn: this.state.currentTurn + 1
+
+            render () {
+                <Square />
+            }
         });
     }
-
 }
+
+export default BoardGame;
