@@ -72,7 +72,7 @@ export default class BoardGame extends Component {
     render(){
       return (
         <div>
-          <div className="container">
+          <div className="container board">
             <div className="row">
               {this.makeSquare(0)}
               {this.makeSquare(1)}

@@ -29,8 +29,8 @@ export default class Square extends Component {
 
     render() {
         return (
-            <div className="col-4">
-                <button className="btn" onClick={this.onClick}>{this.state.player ? this.state.player : ''}</button>
+            <div className="col-4 square">
+                <button className="btn btn-block" onClick={this.onClick}>{this.state.player ? this.state.player : ''}</button>
             </div>
         );
     }
