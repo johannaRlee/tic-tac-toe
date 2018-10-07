@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './styles/App.css';
 import BoardGame from './components/BoardGame.js'
-import GameStatus from './components/GameStatus.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import GameStatus from './components/GameStatus.js'
+
+// function Square(props) {
+//   return (
+//     <button className="square" onClick={prop.onClick}>
+//     {prop.value}
+//     </button>
+//   );
+// }
 
 class App extends Component {
   render() {
@@ -12,9 +21,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Tic Tac Toe</h1>
         </header>
-     <BoardGame />
-     <GameStatus />
-     
+   
+      <BoardGame />
+     </div>
+
     );
   }
 }

@@ -1,30 +1,37 @@
 import React, { Component } from 'react';
-import styles from '../styles/Square.css'
+import PropTypes from 'prop-types';
+import '../styles/Square.css'; 
 
 export default class Square extends Component {
-
     constructor(props) {
-        super(props)
-    }
+        super(props);
 
-    getClassName() {
-        return styles.emptysquare
-    }
+        // props has: currentPlayer, turnNumber, positionId
 
-    play() {
-        if ( this.props.value === '' )
-            this.props.play(this.props.id)
+        this.state = {
+            player: null
+        };
+
+        this.onClick = this.onClick.bind(this);
+    }
+    
+    onClick(event){
+        if(this.state.player){
+            return;
+        }
+
+        this.setState({
+            player: this.props.currentPlayer
+        });
+
+        this.props.onClick(this.props.positionId,this.props.currentPlayer);
     }
 
     render() {
         return (
-            <div 
-                onClick={this.play.bind(this)} 
-                className={this.getClassName()}>
-                    {this.props.value}
+            <div className="col-4">
+                <button className="btn" onClick={this.onClick}>{this.state.player ? this.state.player : ''}</button>
             </div>
-        )
+        );
     }
-
 }
-export default Square;

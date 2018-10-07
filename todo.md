@@ -11,7 +11,6 @@
 - Players place `X` or `O` for a square to indicate their turn
 
 ## What Components do we need?
-
 - Board Game-esque
   - Squares - Places on board, state for Player Turn
   - Keeps track of winner/loser/tie
