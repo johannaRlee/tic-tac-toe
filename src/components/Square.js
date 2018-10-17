@@ -8,29 +8,21 @@ export default class Square extends Component {
 
         // props has: currentPlayer, turnNumber, positionId
 
-        this.state = {
-            player: null
-        };
-
         this.onClick = this.onClick.bind(this);
     }
     
     onClick(event){
-        if(this.state.player){
+        if(this.props.player){
             return;
         }
 
-        this.setState({
-            player: this.props.currentPlayer
-        });
-
-        this.props.onClick(this.props.positionId,this.props.currentPlayer);
+        this.props.onClick(this.props.positionId);
     }
 
     render() {
         return (
             <div className="col-4 square">
-                <button className="btn btn-block" onClick={this.onClick}>{this.state.player ? this.state.player : ''}</button>
+                <button className="btn btn-block" onClick={this.onClick}>{this.props.player ? this.props.player : ''}</button>
             </div>
         );
     }

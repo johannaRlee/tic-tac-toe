@@ -15,12 +15,18 @@ export default class BoardGame extends Component {
 
       this.updateSquare = this.updateSquare.bind(this);
       this.calculateWinner = this.calculateWinner.bind(this);
+      this.resetBoard = this.resetBoard.bind(this);
     }
 
-    updateSquare(squarePosition, player){
+    updateSquare(squarePosition){
+
+      if(this.state.winner != null){
+        return;
+      }
+
       let updatedSquares = this.state.squares;
 
-      updatedSquares[squarePosition] = player;
+      updatedSquares[squarePosition] = this.state.currentPlayer;
 
       let winner = this.calculateWinner(updatedSquares);
 
@@ -50,13 +56,13 @@ export default class BoardGame extends Component {
       for(let i = 0; i < squaresToCheck.length; i++){
         let check = squaresToCheck[i];
         let isXWinner = check.every(function(squareIndex){
-          return squares[squareIndex] == 'X'
+          return squares[squareIndex] === 'X';
         });
 
         if(isXWinner) return 'Winner is X!';
 
         let isOWinner = check.every(function(squareIndex){
-          return squares[squareIndex] == 'O'
+          return squares[squareIndex] === 'O';
         });
 
         if(isOWinner) return 'Winner is O!';
@@ -66,7 +72,16 @@ export default class BoardGame extends Component {
     }
 
     makeSquare(squarePosition){
-      return <Square positionId={squarePosition} onClick={this.updateSquare} currentPlayer={this.state.currentPlayer}/>
+      return <Square positionId={squarePosition} onClick={this.updateSquare} player={this.state.squares[squarePosition]}/>
+    }
+
+    resetBoard(){
+      this.setState({
+        currentPlayer: 'X',
+        turnNumber: 0,
+        squares: Array(9).fill(null),
+        winner: null
+      });
     }
 
     render(){
@@ -90,6 +105,9 @@ export default class BoardGame extends Component {
             </div>
           </div>
           <div>{this.state.winner}</div>
+          <div>
+            <button className="btn btn-light" onClick={this.resetBoard}>Reset</button>
+          </div>
         </div>
       );
     }
