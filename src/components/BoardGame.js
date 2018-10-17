@@ -9,13 +9,18 @@ export default class BoardGame extends Component {
         this.state = {
           currentPlayer: 'X',
           turnNumber: 0,
-          squares: Array(9).fill(null),
+          squares: Array(9).fill({
+            isWinningSquare: false,
+            player: null
+          }),
           winner: null
         };
 
       this.updateSquare = this.updateSquare.bind(this);
       this.calculateWinner = this.calculateWinner.bind(this);
       this.resetBoard = this.resetBoard.bind(this);
+
+      this.resetBoard();
     }
 
     updateSquare(squarePosition){
@@ -26,15 +31,18 @@ export default class BoardGame extends Component {
 
       let updatedSquares = this.state.squares;
 
-      updatedSquares[squarePosition] = this.state.currentPlayer;
+      updatedSquares[squarePosition] = {
+          player: this.state.currentPlayer,
+          isWinningSquare: false
+      };
 
       let winner = this.calculateWinner(updatedSquares);
 
       this.setState({
         currentPlayer: this.state.currentPlayer == 'X' ? 'O' : 'X',
         turnNumber: this.state.turnNumber + 1,
-        squares:updatedSquares,
-        winner: winner
+        squares: winner.Squares,
+        winner: winner.WinnerPlayer
       });
     }
 
@@ -56,30 +64,59 @@ export default class BoardGame extends Component {
       for(let i = 0; i < squaresToCheck.length; i++){
         let check = squaresToCheck[i];
         let isXWinner = check.every(function(squareIndex){
-          return squares[squareIndex] === 'X';
+          return squares[squareIndex].player === 'X';
         });
 
-        if(isXWinner) return 'Winner is X!';
+        if(isXWinner) {
+
+          for(let o = 0; o < check.length; o++){
+            let checkPos = check[o];
+            squares[checkPos].isWinningSquare = true;
+          }
+
+          return {
+            Squares: squares,
+            WinnerPlayer: 'Winner is X!'
+          };
+        }
 
         let isOWinner = check.every(function(squareIndex){
-          return squares[squareIndex] === 'O';
+          return squares[squareIndex].player === 'O';
         });
 
-        if(isOWinner) return 'Winner is O!';
+        if(isOWinner) {
+
+          for(let o = 0; o < check.length; o++){
+            let checkPos = check[o];
+            squares[checkPos].isWinningSquare = true;
+          }
+
+          return {
+            Squares: squares,
+            WinnerPlayer: 'Winner is O!'
+          };
+        }
       }
 
-      return null;
+      return {
+        Squares: squares,
+        WinnerPlayer: null
+      };
     }
 
     makeSquare(squarePosition){
-      return <Square positionId={squarePosition} onClick={this.updateSquare} player={this.state.squares[squarePosition]}/>
+      let square = this.state.squares[squarePosition];
+      return <Square isWinningSquare={square.isWinningSquare} positionId={squarePosition} onClick={this.updateSquare} player={square.player }/>
     }
 
     resetBoard(){
       this.setState({
         currentPlayer: 'X',
         turnNumber: 0,
-        squares: Array(9).fill(null),
+        squares: Array(9).fill({
+          isWinningSquare: false,
+          player: null
+        }),
         winner: null
       });
     }
