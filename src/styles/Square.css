@@ -1,20 +1,23 @@
+
+.btn:focus, .btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
 .btn {
     background-color:#AD9897 !important;
     width: 100% !important;
     height: 100% !important;
-    float: left;
     color: white !important;
-    text-shadow: 1px 1px rgba(61, 43, 43, 0.438);
-    font-size: 30px !important;
+    text-shadow: 1px 2px rgba(61, 43, 43, 0.438);
+    font-size: 40px !important;
 }
+
+
 .square {
     border: 1px solid rgba(59, 48, 48, 0.253);
-    font-size: 30px;
     font-weight: bold;
     line-height: 100%;
-    height: 100%;
     padding: 0;
     text-align: center;
-    width: 100%;
 
 }

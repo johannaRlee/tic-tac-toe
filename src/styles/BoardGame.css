@@ -1,12 +1,9 @@
 .board {
     width: 300px !important;
     height: 300px !important;
-    margin: 15px auto;
+    margin: 20px auto;
     padding: 0;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    box-shadow: 0 19px 38px rgba(53, 39, 39, 0.3), 0 15px 12px rgba(73, 62, 62, 0.22);
+    box-shadow: 0 10px 25px rgba(53, 39, 39, 0.3), 0 15px 12px rgba(73, 62, 62, 0.22);
 }
     
 

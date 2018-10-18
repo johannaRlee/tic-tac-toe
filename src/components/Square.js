@@ -23,7 +23,7 @@ export default class Square extends Component {
 
         return (
             <div className="col-4 square">
-                <button className={'btn btn-block' + (this.props.isWinningSquare ? ' bg-success' : '')} onClick={this.onClick}>{this.props.player ? this.props.player : ''}</button>
+                <button className={'btn btn-block' + (this.props.isWinningSquare ? ' bg-warning' : '')} onClick={this.onClick}>{this.props.player ? this.props.player : ''}</button>
             </div>
         );
     }
